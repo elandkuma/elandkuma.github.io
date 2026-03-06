@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>一封信</title>
+
+<style>
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    background:#fff6f8;
+    font-family:
+        "Microsoft JhengHei",
+        "PingFang TC",
+        "Noto Sans TC",
+        sans-serif;
+}
+
+/* 信封 */
+.envelope{
+    width:230px;
+    height:150px;
+    background:#ff7a9c;
+    position:relative;
+    cursor:pointer;
+    border-radius:12px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    font-size:20px;
+    box-shadow:0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* 信封蓋 */
+.flap{
+    position:absolute;
+    top:-75px;
+    width:0;
+    height:0;
+    border-left:115px solid transparent;
+    border-right:115px solid transparent;
+    border-bottom:75px solid #ff5f87;
+    transform-origin:bottom;
+    transition:0.6s;
+}
+
+/* 信內容 */
+.letter{
+    position:absolute;
+    width:210px;
+    height:130px;
+    background:white;
+    color:#ff4f7b;
+    top:10px;
+    border-radius:10px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:24px;
+    font-weight:bold;
+    opacity:0;
+    transition:0.6s;
+}
+
+/* 打開效果 */
+.open .flap{
+    transform:rotateX(180deg);
+}
+
+.open .letter{
+    opacity:1;
+}
+</style>
+</head>
+
+<body>
+
+<div class="envelope" onclick="openLetter(this)">
+    點我打開 💌
+    <div class="flap"></div>
+    <div class="letter">祝妳說明會順利！</div>
+</div>
+
+<script>
+function openLetter(el){
+    el.classList.toggle("open");
+}
+</script>
+
+</body>
+</html>
