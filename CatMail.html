@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>給妳的一封信</title>
+
+<!-- LINE 預覽設定 -->
+<meta property="og:title" content="給妳的一封信 💌">
+<meta property="og:description" content="點開看看吧">
+<meta property="og:type" content="website">
+
+<style>
+
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(#fff7f9,#ffe3ec);
+    font-family:
+        "Microsoft JhengHei",
+        "PingFang TC",
+        "Noto Sans TC",
+        sans-serif;
+    overflow:hidden;
+}
+
+/* 信封 */
+.envelope{
+    width:240px;
+    height:160px;
+    background:#ff7a9c;
+    position:relative;
+    border-radius:12px;
+    cursor:pointer;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    font-size:20px;
+    box-shadow:0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* 信封蓋 */
+.flap{
+    position:absolute;
+    top:-80px;
+    width:0;
+    height:0;
+    border-left:120px solid transparent;
+    border-right:120px solid transparent;
+    border-bottom:80px solid #ff5f87;
+    transform-origin:bottom;
+    transition:0.6s;
+}
+
+/* 信紙 */
+.letter{
+    position:absolute;
+    width:220px;
+    height:140px;
+    background:white;
+    border-radius:10px;
+    top:20px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+    color:#ff4f7b;
+    transform:translateY(40px);
+    opacity:0;
+    transition:0.6s;
+}
+
+/* 打開動畫 */
+.open .flap{
+    transform:rotateX(180deg);
+}
+
+.open .letter{
+    transform:translateY(-60px);
+    opacity:1;
+}
+
+/* 愛心 */
+.heart{
+    position:absolute;
+    color:#ff6b8a;
+    font-size:20px;
+    animation:float 3s linear forwards;
+}
+
+@keyframes float{
+    0%{
+        transform:translateY(0) scale(1);
+        opacity:1;
+    }
+    100%{
+        transform:translateY(-200px) scale(1.8);
+        opacity:0;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="envelope" onclick="openLetter(this)">
+    點我打開 💌
+    <div class="flap"></div>
+    <div class="letter" id="msg"></div>
+</div>
+
+<script>
+
+let opened=false
+
+function openLetter(el){
+
+    if(opened) return
+    opened=true
+
+    el.classList.add("open")
+
+    typeText("祝妳說明會順利！")
+
+    createHearts()
+}
+
+/* 打字動畫 */
+function typeText(text){
+    let i=0
+    let msg=document.getElementById("msg")
+
+    let timer=setInterval(()=>{
+        msg.innerHTML+=text[i]
+        i++
+        if(i>=text.length){
+            clearInterval(timer)
+        }
+    },150)
+}
+
+/* 愛心動畫 */
+function createHearts(){
+
+    setInterval(()=>{
+
+        let heart=document.createElement("div")
+        heart.className="heart"
+        heart.innerHTML="💗"
+
+        heart.style.left=Math.random()*100+"vw"
+        heart.style.bottom="0"
+
+        document.body.appendChild(heart)
+
+        setTimeout(()=>{
+            heart.remove()
+        },3000)
+
+    },300)
+
+}
+
+</script>
+
+</body>
+</html>
